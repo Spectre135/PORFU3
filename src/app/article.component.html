@@ -1,0 +1,113 @@
+<html>
+
+<head>
+	<title>PORFU</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"
+	/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css"
+	/>
+
+</head>
+
+
+<body>
+
+	<div class="blur-div" *ngIf="loading">
+			<spinner class="center-div" [tickness]="4" [size]="30"></spinner>
+	</div>
+
+	<table class="tabled" align="center">
+		<caption>
+			<div class="pull-right">
+				<div class="inline">
+					<input class="search" size="50" type="text" name="input" [value]="searchString" (input)="searchString=$event.target.value"
+					 placeholder="Search.." />
+				</div>
+				<div class="inline">
+					<button type="submit" class="btn btnSearch" (click)="getData()">
+						<span class="glyphicon glyphicon-search"></span>
+					</button>
+				</div>
+			</div>
+		</caption>
+		<thead class="theadd">
+			<tr>
+				<th>Date</th>
+				<th>ReportType</th>
+				<th>TIN</th>
+				<th>ResCountryCode</th>
+				<th class="sort" (click)="sort('FirstName')">FirstName <span [ngClass]="getSortClass('FirstName')"></span>
+				</th>
+				<th>LastName</th>
+				<th>Name</th>
+				<th>CountryCode</th>
+				<th>AccountNumber</th>
+				<th class="sort" (click)="sort('AccountBalance')">AccountBalance
+					<span [ngClass]="getSortClass('AccountBalance')"></span>
+				</th>
+				<th>AccountBalanceUSD</th>
+				<th>AccountBalanceEUR</th>
+				<th>Payment</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="trd" *ngFor="let article of allArticles" (click)="editDTO(article)">
+				<td>{{article.datum | date: 'dd.MM.yyyy'}}</td>
+				<td class="middle">{{article.reportType}}</td>
+				<td>{{article.tin}}</td>
+				<td class="middle">{{article.resCountryCode}}</td>
+				<td>{{article.firstName}}</td>
+				<td>{{article.lastName}}</td>
+				<td>{{article.name}}</td>
+				<td class="middle">{{ article.countryCode}}</td>
+				<td>{{article.accountNumber}}</td>
+				<td class="right">{{article.accountBalance | number:'1.2-15'}}</td>
+				<td class="right">{{article.accountBalanceUSD | number:'1.2-15'}}</td>
+				<td class="right">{{article.accountBalanceEUR | number:'1.2-15'}}</td>
+				<td class="right">{{article.payment | number:'1.2-15'}}</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td align="right" colspan="100%">
+					<table class="paging-tbl">
+						<tr style="background-color: white;">
+							<td>
+								<span class="pull-right right" style="padding-top: 5px"> 
+									<ng-selectize [config]="config" [options]="pageSizeList" [(ngModel)]="pageSize" (ngModelChange)="getData()" ngDefaultControl></ng-selectize>
+								</span>
+							</td>
+							<td>
+								<div style="padding-top: 5px" class="pull-right right">
+									<!-- pager -->
+									<ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+										<li [ngClass]="{disabled:pager.currentPage === 1}"><a (click)="setPage(1)">First</a></li>
+										<li [ngClass]="{disabled:pager.currentPage === 1}"><a (click)="setPage(pager.currentPage - 1)">Previous</a></li>
+										<li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}"><a (click)="setPage(page)">{{page}}</a></li>
+										<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+											<a (click)="setPage(pager.currentPage + 1)">Next</a>
+										</li>
+										<li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+											<a (click)="setPage(pager.totalPages)">Last</a>
+										</li>
+									</ul>
+								</div>
+							</td>
+							<td>
+								<table class="page">
+									<tr style="background-color: white;">
+										<td><a>Page: {{pager.currentPage}} /{{pager.totalPages}}</a></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</body>
+
+</html>
