@@ -43,7 +43,7 @@ export class ArticleComponent implements OnInit {
 
 
    //edit DTO
-   @ViewChild('childModal') public childModal: ModalDirective;
+   @ViewChild('lgModal') modal: ElementRef;
    public selectedDTO: Article;
   
    // Create constructor to get service instance
@@ -130,7 +130,7 @@ export class ArticleComponent implements OnInit {
        this.selectedDTO = item;
 
        console.log(this.selectedDTO); 
-       this.childModal.show();
+       /*this.childModal.show();*/
     
      }
   

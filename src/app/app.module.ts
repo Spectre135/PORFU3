@@ -7,7 +7,7 @@ import {NgSelectizeModule} from 'ng-selectize/ng-selectize.module';
 import {AppComponent} from './app.component';
 import {ArticleComponent} from './article.component';
 import {ArticleService} from './services/article.service';
-import {EditArticleComponent} from './edit.article.component';
+import {ArticleEditComponent} from './edit.article.component';
 
 import { SpinnerModule } from './spinner/';
 
@@ -24,7 +24,7 @@ import { SpinnerModule } from './spinner/';
     declarations: [
         AppComponent,
         ArticleComponent,
-        EditArticleComponent
+        ArticleEditComponent
     ],
     providers: [
         {provide: LOCALE_ID, useValue: 'sl-SI'},

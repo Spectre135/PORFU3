@@ -1,30 +1,26 @@
-import { Component, OnInit, trigger, state, style, animate, transition} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Article } from './Article';
+
 
 @Component({
-    selector: 'edit-article',
-    templateUrl: './edit.article.component.html',
-    styleUrls: [],
-    animations: [
-        trigger('flyInOut', [
-            state('in', style({ opacity: 1, transform: 'translateX(0)' })),
-            transition('void => *', [
-                style({
-                    opacity: 0,
-                    transform: 'translateX(-100%)'
-                }),
-                animate('0.6s ease-in')
-            ]),
-            transition('* => void', [
-                animate('0.2s 10 ease-out', style({
-                    opacity: 0,
-                    transform: 'translateX(100%)'
-                }))
-            ])
-        ])
-    ]
-})
-export class EditArticleComponent {
+    moduleId: 'article-edit',
+    selector: 'pform',
+    templateUrl: './edit.article.component.html'    
+ })
+
+export class ArticleEditComponent {
     constructor() {
+    }
+
+    editDto = Article;
+    submitted = false;
+    onSubmit() { 
+        console.log('Sumbitted Form ! ');
+
+        this.submitted = true; 
 
     }
+    
+  // TODO: Remove this when we're done
+    get diagnostic() { return JSON.stringify(this.editDto); }
 }
