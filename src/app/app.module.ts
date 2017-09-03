@@ -9,7 +9,7 @@ import {ArticleComponent} from './article.component';
 import {ArticleService} from './services/article.service';
 import {EditArticleComponent} from './edit.article.component';
 
-import { SpinnerModule } from './spinner/';
+import {SpinnerModule} from './spinner/';
 
 @NgModule({
 
@@ -31,7 +31,8 @@ import { SpinnerModule } from './spinner/';
         ArticleService
     ],
     bootstrap: [
-        AppComponent
+        AppComponent,
+        EditArticleComponent
     ]
 })
 export class AppModule {

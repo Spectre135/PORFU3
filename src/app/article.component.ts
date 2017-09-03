@@ -6,6 +6,7 @@ import { ArticleService } from './services/article.service';
 import { PagerService } from './services/paging.service';
 import { Article } from './article';
 import { Data } from './data';
+import { EditArticleComponent } from './edit.article.component';
 import { PageSizeValues} from './selectize/selectize.configs';
 import { SELECTIZE_CONFIG} from './selectize/state.config';
 import { NumberCode } from 'angular2localization';
@@ -19,20 +20,20 @@ import { SpinnerModule } from './spinner/';
    templateUrl: './article.component.html',
    styleUrls: ['../css/main.css']
 })
-export class ArticleComponent implements OnInit { 
+export class ArticleComponent implements OnInit {
    // Component properties
    allArticles: Article[];
    searchString: string;
-   asc: string;  
+   asc: string;
    sortKey: string;
    statusCode: number;
    requestProcessing = false;
    processValidation = false;
-  
+
    // pager object
    pager: any = {};
    pagedItems: any[];
-   //rowsCount: number; 
+   //rowsCount: number;
    @Input() pageSize: number;
    pageSizeList: any = PageSizeValues;
    pageIndex: number;
@@ -43,9 +44,8 @@ export class ArticleComponent implements OnInit {
 
 
    //edit DTO
-   @ViewChild('childModal') public childModal: ModalDirective;
    public selectedDTO: Article;
-  
+
    // Create constructor to get service instance
    constructor(private dtoService: ArticleService, private pagerService: PagerService) {
    }
@@ -60,35 +60,35 @@ export class ArticleComponent implements OnInit {
        this.pageSize = 10;
        this.pageIndex = 1;
        this.pager = this.pagerService.getPager(1, this.pageIndex, this.pageSize);
-   }   
-   
+   }
+
    // Fetch all articles
    //Pazi izvaja se async zato kli�em setPage znotraj ko resolvam podatke
-   getData() {     
+   getData() {
        this.loading = true;
-       this.dtoService.getData(this.getEmptyString(this.searchString), '*', this.pageIndex, this.pageSize, this.sortKey, this.asc).subscribe(
+       this.dtoService.getJSONData(this.getEmptyString(this.searchString), '*', this.pageIndex, this.pageSize, this.sortKey, this.asc).subscribe(
            data => {
-                    this.allArticles = data.dataList; 
+                    this.allArticles = data.dataList;
                     //this.rowsCount   = data.rowsCount;
                     this.pager = this.pagerService.getPager(data.rowsCount, this.pageIndex, this.pageSize);
                     this.loading = false;
                     },
-           errorCode => this.statusCode = errorCode);   
+           errorCode => this.statusCode = errorCode);
    }
 
    // Perform preliminary processing configurations
    preProcessConfigurations() {
       this.statusCode = null;
-      this.requestProcessing = true;   
+      this.requestProcessing = true;
    }
-  
+
    private getEmptyString(response: string) {
      if (response === '') {
-         response = 'undefined'; 
+         response = 'undefined';
        }
      return response;
    }
-  
+
    //sort data
    sort(keyname: string) {
         this.sortKey = keyname;   //set the sortKey to the param passed
@@ -100,7 +100,7 @@ export class ArticleComponent implements OnInit {
         //this.asc = !this.asc; //if true make it false and vice versa
         this.getData();
     }
-  
+
    getSortClass(keyname: string) {
 
      if (this.sortKey === keyname) {
@@ -113,7 +113,7 @@ export class ArticleComponent implements OnInit {
        return '';
      }
    }
-  
+
    //paging
    setPage(page: number) {
      if (page < 1 || page > this.pager.totalPages) {
@@ -123,17 +123,6 @@ export class ArticleComponent implements OnInit {
      this.getData();
    }
 
-
-   //edit on row click
-   editDTO(item: Article) {
-    
-       this.selectedDTO = item;
-
-       console.log(this.selectedDTO); 
-       this.childModal.show();
-    
-     }
-  
 }
 
 
