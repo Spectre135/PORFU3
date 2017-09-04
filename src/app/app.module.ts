@@ -3,6 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {NgSelectizeModule} from 'ng-selectize/ng-selectize.module';
+import {ModalModule} from 'ng2-bootstrap';
 
 import {AppComponent} from './app.component';
 import {ArticleComponent} from './article.component';
@@ -19,20 +20,22 @@ import {SpinnerModule} from './spinner/';
         ReactiveFormsModule,
         FormsModule,
         NgSelectizeModule,
-        SpinnerModule
+        SpinnerModule,
+        ModalModule.forRoot()
+
     ],
     declarations: [
         AppComponent,
         ArticleComponent,
         ArticleEditComponent
+
     ],
     providers: [
         {provide: LOCALE_ID, useValue: 'sl-SI'},
         ArticleService
     ],
     bootstrap: [
-        AppComponent,
-        EditArticleComponent
+        AppComponent
     ]
 })
 export class AppModule {

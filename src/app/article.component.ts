@@ -1,12 +1,11 @@
 import { Input, Component, OnInit, OnChanges, ElementRef, ViewChild } from '@angular/core';
 import { FormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { ModalDirective } from 'ngx-bootstrap';
 import { ArticleService } from './services/article.service';
 import { PagerService } from './services/paging.service';
 import { Article } from './article';
 import { Data } from './data';
-import { EditArticleComponent } from './edit.article.component';
+import { ArticleEditComponent } from './edit.article.component';
 import { PageSizeValues} from './selectize/selectize.configs';
 import { SELECTIZE_CONFIG} from './selectize/state.config';
 import { NumberCode } from 'angular2localization';
@@ -44,10 +43,6 @@ export class ArticleComponent implements OnInit {
 
 
    //edit DTO
-<<<<<<< HEAD
-=======
-   @ViewChild('lgModal') modal: ElementRef;
->>>>>>> 35b39b568577821067d71cd60cf3efb5a3e7f368
    public selectedDTO: Article;
 
    // Create constructor to get service instance
@@ -127,20 +122,6 @@ export class ArticleComponent implements OnInit {
      this.getData();
    }
 
-<<<<<<< HEAD
-=======
-
-   //edit on row click
-   editDTO(item: Article) {
-    
-       this.selectedDTO = item;
-
-       console.log(this.selectedDTO); 
-       /*this.childModal.show();*/
-    
-     }
-  
->>>>>>> 35b39b568577821067d71cd60cf3efb5a3e7f368
 }
 
 
