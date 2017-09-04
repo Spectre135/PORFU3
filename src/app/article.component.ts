@@ -44,6 +44,10 @@ export class ArticleComponent implements OnInit {
 
 
    //edit DTO
+<<<<<<< HEAD
+=======
+   @ViewChild('lgModal') modal: ElementRef;
+>>>>>>> 35b39b568577821067d71cd60cf3efb5a3e7f368
    public selectedDTO: Article;
 
    // Create constructor to get service instance
@@ -123,6 +127,20 @@ export class ArticleComponent implements OnInit {
      this.getData();
    }
 
+<<<<<<< HEAD
+=======
+
+   //edit on row click
+   editDTO(item: Article) {
+    
+       this.selectedDTO = item;
+
+       console.log(this.selectedDTO); 
+       /*this.childModal.show();*/
+    
+     }
+  
+>>>>>>> 35b39b568577821067d71cd60cf3efb5a3e7f368
 }
 
 
