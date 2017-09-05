@@ -8,9 +8,6 @@ import { Data } from '../data';
 @Injectable()
 export class ArticleService {
    //URLs for CRUD operations
-    dataUrl = 'http://pc-150163.novakbm.nkbm.si:8080/PORFU_REST/rest/porocanje/';
-    saveUrl = 'http://pc-150163.novakbm.nkbm.si:8080/PORFU_REST/rest/save/';
-    listUrl = 'http://pc-150163.novakbm.nkbm.si:8080/PORFU_REST/rest/list/';
     private jsonFileURL = '../assets/test.json';
     //Create constructor to get Http instance
 
@@ -39,7 +36,6 @@ export class ArticleService {
             sortKey: string,
             asc: string): Observable<Data> {
 
-        const nkbmAuthToken = '4d03c3ad-1449-422a-b770-ebe247945529';
         const url = this.dataUrl + searchString;
         const cpHeaders: Headers = new Headers;
 
